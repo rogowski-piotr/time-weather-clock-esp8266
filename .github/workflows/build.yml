@@ -4,40 +4,32 @@ on:
   push:
     branches:
       - main
+    pull_request:
 
 jobs:
   build:
-    name: Build and Test
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Arduino CLI
-      run: |
-        mkdir -p $HOME/bin
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=$HOME/bin sh
-        export PATH="$HOME/bin:$PATH"
+      - name: 🏗️ Build Docker image
+        run: |
+          echo "🚧 Building Docker image..."
+          docker build -t arduino-builder -f docker/Dockerfile-build .
+          if [ $? -eq 0 ]; then
+            echo "✅ Docker image build successful!"
+          else
+            echo "❌ Docker image build failed!"
+            exit 1
+          fi
 
-    - name: Install ESP8266 Core
-      run: |
-        arduino-cli core update-index
-        arduino-cli core install esp8266:esp8266
-
-    - name: Install Arduino CLI
-      run: |
-        arduino-cli --version  # This step just checks if Arduino CLI is correctly installed.
-
-    - name: Build Sketch
-      run: |
-        arduino-cli compile --fqbn esp8266:esp8266:d1 main.ino
-
-    - name: Display Compilation Results
-      run: |
-        if [ -f "build/esp8266.esp8266.d1/main.ino.bin" ]; then
-          echo "Build successful!"
-        else
-          echo "Build failed!"
-          exit 1
-        fi
+      - name: 🛠️ Compile Arduino code with Docker
+        run: |
+          echo "🔨 Compiling Arduino code..."
+          docker run -t arduino-builder
+          if [ $? -eq 0 ]; then
+            echo "✅ Arduino code compilation successful!"
+          fi

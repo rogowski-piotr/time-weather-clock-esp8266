@@ -1,0 +1,24 @@
+FROM ubuntu:latest
+
+ENV LANG C.UTF-8
+
+WORKDIR /time-weather-clock-esp8266
+
+# Install & Update 
+RUN apt-get update && apt-get install -y \
+    curl \
+    python3
+
+# Install Arduino-cli
+RUN curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh \
+    | BINDIR=/usr/local/bin \
+    sh
+
+# Install esp8266
+COPY docker/.cli-config.yml .cli-config.yml
+RUN arduino-cli core update-index --config-file .cli-config.yml
+RUN arduino-cli core install esp8266:esp8266 --config-file .cli-config.yml
+
+# Build
+COPY time-weather-clock-esp8266.ino time-weather-clock-esp8266.ino
+CMD [ "arduino-cli", "compile", "--fqbn", "esp8266:esp8266:d1", "."]
