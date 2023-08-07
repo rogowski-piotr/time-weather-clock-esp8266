@@ -1,11 +1,8 @@
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-
-#include "src/WiFiConnection.h"
-#include "src/WeatherData.h"
+#include <Arduino.h>
+#include "WiFiConnection.h"
+#include "WeatherData.h"
 
 
-WiFiClient client;
 WeatherData weatherData;
 
 void setup() {
@@ -14,13 +11,14 @@ void setup() {
 }
 
 void loop() {
-  getWeatherData(client, &weatherData);
+  getWeatherData(&weatherData);
 
   Serial.println(weatherData.description);
   Serial.println(weatherData.temperature);
   Serial.println(weatherData.pressure);
   Serial.println(weatherData.humidity);
   Serial.println(weatherData.wind_speed);
-  
-  delay(10000);
+  Serial.println(weatherData.data_received);
+
+  delay(60000);
 }

@@ -1,15 +1,16 @@
+#include <ESP8266WiFi.h>
 #include "WiFiConnection.h"
 #include "secrets.h"
 
 
 void connectToWiFi() {
   WiFi.begin(SECRET_SSID, SECRET_PASS);
-  Serial.println("Connecting");
+  Serial.print("\n\nConnecting");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
 
-  Serial.println("Connected!");
+  Serial.println("\nConnected!\n");
 }
