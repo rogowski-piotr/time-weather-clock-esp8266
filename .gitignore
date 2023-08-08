@@ -4,6 +4,8 @@
 .vscode/launch.json
 .vscode/ipch
 .vscode/extensions.json
+.vscode/settings.json
 src/secrets.h
 test
 lib
+TODO.md

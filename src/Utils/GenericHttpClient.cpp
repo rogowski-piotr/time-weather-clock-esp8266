@@ -1,8 +1,6 @@
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
+#include "Utils/GenericHttpClient.h"
 
-
-String httpGet(String url, int& httpStatusCode) {
+String GenericHttpClient::httpGet(String url, int& httpStatusCode) {
     WiFiClient wifiClient;
     HTTPClient httpClient;
 
