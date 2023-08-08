@@ -30,13 +30,11 @@ jobs:
         run: platformio run
 
       - name: Run unit tests 📋
-        if: false # disable tests for now :)
         run: |
-          echo "🚧 Building Docker image..."
-          platformio test
+          platformio test --environment native
           if [ $? -eq 0 ]; then
-            echo "✅ Docker image build successful!"
+            echo "✅ Tests passed!"
           else
-            echo "❌ Docker image build failed!"
+            echo "❌ Tests failed!"
             exit 1
           fi
