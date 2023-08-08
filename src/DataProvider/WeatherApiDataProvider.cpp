@@ -7,9 +7,9 @@ void WeatherApiDataProvider::getWeatherData(WeatherData* weatherData) {
     int httpStatusCode = -1;
     String url = buildURL();
     String result = httpClient.httpGet(url, httpStatusCode);
-    deserializeWeatherData(result, weatherData);
 
     if (httpStatusCode == 200) {
+        deserializeWeatherData(result, weatherData);
         weatherData->data_received = true;
     } else {
         weatherData->data_received = false;
