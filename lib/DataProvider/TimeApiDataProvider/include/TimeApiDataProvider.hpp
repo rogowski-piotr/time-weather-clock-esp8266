@@ -2,8 +2,8 @@
 #define TimeApiDataProvider_h
 
 #include <ArduinoJson.h>
-#include "DataProvider/GenericApiData.h"
-#include "Utils/GenericHttpClient.h"
+#include "GenericApiData.hpp"
+#include "GenericHttpClient/include/GenericHttpClient.hpp"
 
 
 struct TimeData : public GenericApiData {

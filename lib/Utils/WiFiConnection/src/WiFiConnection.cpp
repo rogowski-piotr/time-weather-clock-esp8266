@@ -1,8 +1,8 @@
-#include "Utils/WiFiConnection.h"
+#include "WiFiConnection/include/WiFiConnection.hpp"
 
 
-void connectToWiFi() {
-    WiFi.begin(SECRET_SSID, SECRET_PASS);
+void connectToWiFi(String ssid, String password) {
+    WiFi.begin(ssid, password);
     Serial.print("\n\nConnecting");
 
     while (WiFi.status() != WL_CONNECTED) {

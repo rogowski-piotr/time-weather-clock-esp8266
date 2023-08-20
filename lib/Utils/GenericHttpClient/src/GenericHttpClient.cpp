@@ -1,4 +1,4 @@
-#include "Utils/GenericHttpClient.h"
+#include "GenericHttpClient/include/GenericHttpClient.hpp"
 
 String GenericHttpClient::httpGet(String url, int& httpStatusCode) {
     WiFiClient wifiClient;

@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include "Utils/WiFiConnection.h"
-#include "DataProvider/WeatherApiDataProvider.h"
-#include "DataProvider/TimeApiDataProvider.h"
-
+#include "secrets.hpp"
+#include "WiFiConnection/include/WiFiConnection.hpp"
+#include "WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
+#include "TimeApiDataProvider/include/TimeApiDataProvider.hpp"
 
 TimeApiDataProvider timeApiDataProvider;
 TimeData timeData;
@@ -12,7 +12,7 @@ WeatherData weatherData;
 
 void setup() {
     Serial.begin(9600);
-    connectToWiFi();
+    connectToWiFi(SECRET_SSID, SECRET_PASS);
 }
 
 void loop() {
@@ -27,7 +27,7 @@ void loop() {
 
     Serial.println("\n");
 
-    weatherApiDataProvider.getWeatherData(&weatherData);
+    weatherApiDataProvider.getWeatherData(&weatherData, OPEN_WEATHER_MAP_API_KEY, CITY_ID);
     Serial.println(weatherData.description);
     Serial.println(weatherData.temperature);
     Serial.println(weatherData.pressure);

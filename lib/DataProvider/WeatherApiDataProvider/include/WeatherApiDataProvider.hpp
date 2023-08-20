@@ -2,9 +2,8 @@
 #define WeatherApiDataProvider_h
 
 #include <ArduinoJson.h>
-#include "DataProvider/GenericApiData.h"
-#include "Utils/GenericHttpClient.h"
-#include "secrets.h"
+#include "GenericApiData.hpp"
+#include "GenericHttpClient/include/GenericHttpClient.hpp"
 
 
 struct WeatherData : public GenericApiData {
@@ -17,14 +16,14 @@ struct WeatherData : public GenericApiData {
 
 class WeatherApiDataProvider {
 public:
-    void getWeatherData(WeatherData* weatherData);
+    void getWeatherData(WeatherData* weatherData, String api_key, String city_id);
 
 private:
     GenericHttpClient httpClient = GenericHttpClient();
 
     static String BASE_URL;
 
-    static String buildURL();
+    static String buildURL(String api_key, String city_id);
 
     static void deserializeWeatherData(const String& jsonData, WeatherData* weatherData);
 

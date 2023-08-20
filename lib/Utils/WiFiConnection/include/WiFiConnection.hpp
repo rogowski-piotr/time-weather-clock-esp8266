@@ -2,8 +2,7 @@
 #define WiFiConnection_h
 
 #include <ESP8266WiFi.h>
-#include "secrets.h"
 
-void connectToWiFi();
+void connectToWiFi(String ssid, String password);
 
 #endif

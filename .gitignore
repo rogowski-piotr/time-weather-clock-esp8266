@@ -5,6 +5,5 @@
 .vscode/ipch
 .vscode/extensions.json
 .vscode/settings.json
-src/secrets.h
-lib
+src/secrets.hpp
 TODO.md

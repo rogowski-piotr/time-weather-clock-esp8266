@@ -1,4 +1,4 @@
-#include "DataProvider/TimeApiDataProvider.h"
+#include "TimeApiDataProvider/include/TimeApiDataProvider.hpp"
 
 
 String TimeApiDataProvider::BASE_URL =  "worldtimeapi.org/api/ip";

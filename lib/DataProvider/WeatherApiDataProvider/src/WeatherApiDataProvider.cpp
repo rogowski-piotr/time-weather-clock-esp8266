@@ -1,11 +1,11 @@
-#include "DataProvider/WeatherApiDataProvider.h"
+#include "WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
 
 
 String WeatherApiDataProvider::BASE_URL =  "api.openweathermap.org";
 
-void WeatherApiDataProvider::getWeatherData(WeatherData* weatherData) {
+void WeatherApiDataProvider::getWeatherData(WeatherData* weatherData, String api_key, String city_id) {
     int httpStatusCode = -1;
-    String url = buildURL();
+    String url = buildURL(api_key, city_id);
     String result = httpClient.httpGet(url, httpStatusCode);
 
     if (httpStatusCode == 200) {
@@ -38,10 +38,10 @@ void WeatherApiDataProvider::deserializeWeatherData(const String& jsonData, Weat
     weatherData->wind_speed = wind_speed;
 }
 
-String WeatherApiDataProvider::buildURL() {
+String WeatherApiDataProvider::buildURL(String api_key, String city_id) {
     return "http://" + BASE_URL +
-        "/data/2.5/weather?id=" + CITY_ID +
-        "&units=metric&APPID=" + OPEN_WEATHER_MAP_API_KEY;
+        "/data/2.5/weather?id=" + city_id +
+        "&units=metric&APPID=" + api_key;
 }
 
 void WeatherApiDataProvider::setWeatherDescription(WeatherData* weatherData, const char* descriptionMain, const char* descriptionFull) {
