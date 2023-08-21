@@ -1,22 +1,7 @@
-#include "TimeApiDataProvider/include/TimeApiDataProvider.hpp"
+#include "TimeApiData/TimeApiDataDeserializer/include/TimeApiDataDeserializer.hpp"
 
 
-String TimeApiDataProvider::BASE_URL =  "worldtimeapi.org/api/ip";
-
-void TimeApiDataProvider::getTimeData(TimeData* timeData) {
-    int httpStatusCode = -1;
-    String url = buildURL();
-    String result = httpClient.httpGet(url, httpStatusCode);
-
-    if (httpStatusCode == 200) {
-        deserializeTimeData(result, timeData);
-        timeData->data_received = true;
-    } else {
-        timeData->data_received = false;
-    }
-}
-
-void TimeApiDataProvider::deserializeTimeData(const String& jsonData, TimeData* timeData) {
+void TimeApiDataDeserializer::deserialize(const String& jsonData, TimeData* timeData) {
     // Parsing result by https://arduinojson.org/v6/assistant/
     const size_t capacity = JSON_OBJECT_SIZE(15) + 350;
     DynamicJsonDocument doc(capacity);
@@ -30,8 +15,4 @@ void TimeApiDataProvider::deserializeTimeData(const String& jsonData, TimeData* 
     timeData->hour = String(dateTime).substring(11, 13).toInt();
     timeData->minute = String(dateTime).substring(14, 16).toInt();
     timeData->second = String(dateTime).substring(17, 19).toInt();
-}
-
-String TimeApiDataProvider::buildURL() {
-    return "http://" + BASE_URL;
 }

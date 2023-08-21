@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "secrets.hpp"
 #include "WiFiConnection/include/WiFiConnection.hpp"
-#include "WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
-#include "TimeApiDataProvider/include/TimeApiDataProvider.hpp"
+#include "WeatherApiData/WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
+#include "TimeApiData/TimeApiDataProvider/include/TimeApiDataProvider.hpp"
 
 TimeApiDataProvider timeApiDataProvider;
 TimeData timeData;

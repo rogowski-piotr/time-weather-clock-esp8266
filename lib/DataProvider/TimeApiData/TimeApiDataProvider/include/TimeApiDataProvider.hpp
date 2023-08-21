@@ -1,19 +1,9 @@
 #ifndef TimeApiDataProvider_h
 #define TimeApiDataProvider_h
 
-#include <ArduinoJson.h>
-#include "GenericApiData.hpp"
 #include "GenericHttpClient/include/GenericHttpClient.hpp"
+#include "TimeApiData/TimeApiDataDeserializer/include/TimeApiDataDeserializer.hpp"
 
-
-struct TimeData : public GenericApiData {
-    int year;
-    int month;
-    int day;
-    int hour;
-    int minute;
-    int second;
-};
 
 class TimeApiDataProvider {
 public:
@@ -25,8 +15,6 @@ private:
     static String BASE_URL;
 
     static String buildURL();
-
-    static void deserializeTimeData(const String& jsonData, TimeData* timeData);
 };
 
 #endif
