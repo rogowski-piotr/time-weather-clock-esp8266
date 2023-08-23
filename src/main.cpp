@@ -1,5 +1,7 @@
 #include <Arduino.h>
+#include "config.hpp"
 #include "secrets.hpp"
+#include "NTPSynchronization/include/NTPSynchronization.hpp"
 #include "WiFiConnection/include/WiFiConnection.hpp"
 #include "WeatherApiData/WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
 #include "TimeApiData/TimeApiDataProvider/include/TimeApiDataProvider.hpp"
@@ -13,6 +15,7 @@ WeatherData weatherData;
 void setup() {
     Serial.begin(9600);
     connectToWiFi(SECRET_SSID, SECRET_PASS);
+    syncWithNTP(NTP_CONNECTION_TIMEOUT_MS);
 }
 
 void loop() {
