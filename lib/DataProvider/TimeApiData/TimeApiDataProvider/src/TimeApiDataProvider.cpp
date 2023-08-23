@@ -17,5 +17,5 @@ void TimeApiDataProvider::getTimeData(TimeData* timeData) {
 }
 
 String TimeApiDataProvider::buildURL() {
-    return "http://" + BASE_URL;
+    return "https://" + BASE_URL;
 }

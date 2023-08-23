@@ -17,7 +17,7 @@ void WeatherApiDataProvider::getWeatherData(WeatherData* weatherData, String api
 }
 
 String WeatherApiDataProvider::buildURL(String api_key, String city_id) {
-    return "http://" + BASE_URL +
+    return "https://" + BASE_URL +
         "/data/2.5/weather?id=" + city_id +
         "&units=metric&APPID=" + api_key;
 }
