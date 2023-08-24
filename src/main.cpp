@@ -12,8 +12,13 @@ TimeData timeData;
 WeatherApiDataProvider weatherApiDataProvider;
 WeatherData weatherData;
 
+IRAM_ATTR void BACKLIGHT_CONTROL() {
+  Serial.println("interrupt");
+}
+
 void setup() {
     Serial.begin(9600);
+    attachInterrupt(digitalPinToInterrupt(BACKLIGHT_PIN), BACKLIGHT_CONTROL, RISING);
     connectToWiFi(SECRET_SSID, SECRET_PASS);
     syncWithNTP(NTP_CONNECTION_TIMEOUT_MS);
 }
