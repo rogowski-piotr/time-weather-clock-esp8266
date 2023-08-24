@@ -5,6 +5,7 @@
 #include "WiFiConnection/include/WiFiConnection.hpp"
 #include "WeatherApiData/WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
 #include "TimeApiData/TimeApiDataProvider/include/TimeApiDataProvider.hpp"
+#include "RealTimeSyncer.hpp"
 
 TimeApiDataProvider timeApiDataProvider;
 TimeData timeData;
@@ -35,6 +36,8 @@ void loop() {
 
     Serial.println("\n");
 
+    RealTimeSyncer::sync(&timeData, 20);
+
     weatherApiDataProvider.getWeatherData(&weatherData, OPEN_WEATHER_MAP_API_KEY, CITY_ID);
     Serial.println(weatherData.description);
     Serial.println(weatherData.temperature);
@@ -42,6 +45,4 @@ void loop() {
     Serial.println(weatherData.humidity);
     Serial.println(weatherData.wind_speed);
     Serial.println(weatherData.data_received);
-
-    delay(60000);
 }
