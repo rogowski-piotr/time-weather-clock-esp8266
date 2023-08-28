@@ -2,7 +2,7 @@
 #define RealTimeSyncer_h
 
 #include <Arduino.h>
-#include "TimeApiData/TimeApiDataDeserializer/include/TimeApiDataDeserializer.hpp"
+#include "TimeApi/TimeApiData.hpp"
 
 #define MS_PER_SEC 1000
 
@@ -14,12 +14,12 @@ enum TimeUnit {
 
 class RealTimeSyncer {
 public:
-    static void sync(TimeData* timeData, int timeToSyncSec);
+    static void sync(TimeApiData* timeData, int timeToSyncSec);
 
 private:
-    static void resetTimeUnit(TimeData* timeData, TimeUnit timeUnit);
+    static void resetTimeUnit(TimeApiData* timeData, TimeUnit timeUnit);
 
-    static void incrementTimeUnit(TimeData* timeData, TimeUnit timeUnit);
+    static void incrementTimeUnit(TimeApiData* timeData, TimeUnit timeUnit);
 
     static void delayOneSec(int& currentMsRef);
 };

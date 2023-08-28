@@ -2,12 +2,12 @@
 #define TimeApiDataProvider_h
 
 #include "GenericHttpClient/include/GenericHttpClient.hpp"
-#include "TimeApiData/TimeApiDataDeserializer/include/TimeApiDataDeserializer.hpp"
-
+#include "TimeApi/TimeApiDataDeserializer/include/TimeApiDataDeserializer.hpp"
+#include "TimeApi/TimeApiData.hpp"
 
 class TimeApiDataProvider {
 public:
-    void getTimeData(TimeData* timeData);
+    void getTimeData(TimeApiData* timeData);
 
 private:
     GenericHttpClient httpClient = GenericHttpClient();

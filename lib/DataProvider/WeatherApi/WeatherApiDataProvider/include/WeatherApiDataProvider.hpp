@@ -1,13 +1,13 @@
 #ifndef WeatherApiDataProvider_h
 #define WeatherApiDataProvider_h
 
-#include "WeatherApiData/WeatherApiDataDeserializer/include/WeatherApiDataDeserializer.hpp"
+#include "WeatherApi/WeatherApiDataDeserializer/include/WeatherApiDataDeserializer.hpp"
 #include "GenericHttpClient/include/GenericHttpClient.hpp"
-
+#include "WeatherApi/WeatherApiData.hpp"
 
 class WeatherApiDataProvider {
 public:
-    void getWeatherData(WeatherData* weatherData, String api_key, String city_id);
+    void getWeatherData(WeatherApiData* weatherData, String api_key, String city_id);
 
 private:
     GenericHttpClient httpClient = GenericHttpClient();
