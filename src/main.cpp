@@ -5,7 +5,6 @@
 #include "WiFiConnection/include/WiFiConnection.hpp"
 #include "WeatherApi/WeatherApiDataProvider/include/WeatherApiDataProvider.hpp"
 #include "TimeApi/TimeApiDataProvider/include/TimeApiDataProvider.hpp"
-#include "RealTimeSyncer.hpp"
 #include "DisplayController.hpp"
 #include "TimeApi/TimeApiData.hpp"
 #include "WeatherApi/WeatherApiData.hpp"
@@ -16,12 +15,15 @@ TimeApiData timeData;
 WeatherApiDataProvider weatherApiDataProvider;
 WeatherApiData weatherData;
 
+DisplayController displayController(CITY_NAME);
+
 IRAM_ATTR void BACKLIGHT_CONTROL() {
-  Serial.println("interrupt");
+  displayController.changeBacklight();
 }
 
 void setup() {
     Serial.begin(9600);
+    displayController.initDisplay();
     attachInterrupt(digitalPinToInterrupt(BACKLIGHT_PIN), BACKLIGHT_CONTROL, RISING);
     connectToWiFi(SECRET_SSID, SECRET_PASS);
     syncWithNTP(NTP_CONNECTION_TIMEOUT_MS);
@@ -31,8 +33,6 @@ void setup() {
 }
 
 void loop() {
-    DisplayController::showData(timeData);
-    DisplayController::showData(weatherData);
-
-    RealTimeSyncer::sync(&timeData, 120);
+    displayController.showData(timeData, timeData, SHOW_TIME_DATA_SEC);
+    displayController.showData(weatherData, timeData, SHOW_WEATHER_DATA_SEC);
 }
