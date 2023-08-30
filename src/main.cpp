@@ -25,8 +25,8 @@ void setup() {
     Serial.begin(9600);
     displayController.initDisplay();
     attachInterrupt(digitalPinToInterrupt(BACKLIGHT_PIN), BACKLIGHT_CONTROL, RISING);
-    connectToWiFi(SECRET_SSID, SECRET_PASS);
-    syncWithNTP(NTP_CONNECTION_TIMEOUT_MS);
+    connectToWiFi(SECRET_SSID, SECRET_PASS, displayController.getLcdRef());
+    syncWithNTP(NTP_CONNECTION_TIMEOUT_MS, displayController.getLcdRef());
 
     weatherApiDataProvider.getWeatherData(&weatherData, OPEN_WEATHER_MAP_API_KEY, CITY_ID);
     timeApiDataProvider.getTimeData(&timeData);

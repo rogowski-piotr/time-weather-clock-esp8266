@@ -14,6 +14,7 @@ public:
     void initDisplay();
     void changeBacklight();
     void showData(const BaseApiData& dataToShow, TimeApiData& timeDataToSync, int timeToShowSec);
+    LiquidCrystal_I2C& getLcdRef() { return lcd; };
 
 private:
     LiquidCrystal_I2C lcd{0x27, 16, 2};
@@ -25,5 +26,3 @@ private:
 };
 
 #endif
-
-
