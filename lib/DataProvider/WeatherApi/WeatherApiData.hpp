@@ -7,7 +7,7 @@ class WeatherApiData : public BaseApiData {
 public:
     int getClassType() const override { return CLASS_WEATHER_API_DTO; }
 
-    const char* getDescription() const { return description; }
+    String getDescription() const { return description; }
     void setDescription(const char* newDescription) { description = newDescription; }
 
     float getTemperature() const { return temperature; }
@@ -23,7 +23,7 @@ public:
     void setWindSpeed(float newWindSpeed) { wind_speed = newWindSpeed; }
 
 private:
-    const char* description;
+    String description;
     float temperature;
     int pressure;
     int humidity;
