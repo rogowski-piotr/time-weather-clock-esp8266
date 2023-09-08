@@ -18,7 +18,12 @@ WeatherApiData weatherData;
 DisplayController displayController(CITY_NAME);
 
 IRAM_ATTR void BACKLIGHT_CONTROL() {
-  displayController.changeBacklight();
+	displayController.changeBacklight();
+}
+
+bool shouldFetchData(unsigned long lastDataFetchedAt) {
+	unsigned long elapsed = millis() - lastDataFetchedAt;
+	return elapsed > TIME_TO_REFRESH_DATA_SEC * 1000;
 }
 
 void setup() {
@@ -27,12 +32,15 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(BACKLIGHT_PIN), BACKLIGHT_CONTROL, RISING);
     connectToWiFi(SECRET_SSID, SECRET_PASS, displayController.getLcdRef());
     syncWithNTP(NTP_CONNECTION_TIMEOUT_MS, displayController.getLcdRef());
-
-    weatherApiDataProvider.getWeatherData(&weatherData, OPEN_WEATHER_MAP_API_KEY, CITY_ID);
-    timeApiDataProvider.getTimeData(&timeData);
 }
 
 void loop() {
-    displayController.showData(timeData, timeData, SHOW_TIME_DATA_SEC);
-    displayController.showData(weatherData, timeData, SHOW_WEATHER_DATA_SEC);
+    weatherApiDataProvider.getWeatherData(&weatherData, OPEN_WEATHER_MAP_API_KEY, CITY_ID);
+    timeApiDataProvider.getTimeData(&timeData);
+	unsigned long lastDataFetchedAt = millis();
+
+	while (!shouldFetchData(lastDataFetchedAt)) {
+		displayController.showData(timeData, timeData, SHOW_TIME_DATA_SEC);
+		displayController.showData(weatherData, timeData, SHOW_WEATHER_DATA_SEC);
+	}
 }
