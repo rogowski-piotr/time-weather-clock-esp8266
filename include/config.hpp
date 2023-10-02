@@ -1,4 +1,5 @@
-#define TIME_TO_REFRESH_DATA_SEC (20 * 60) // 20 minutes
+#define TIME_TO_REFRESH_TIME_DATA_SEC (5 * 60)      // 5 minutes
+#define TIME_TO_REFRESH_WEATHER_DATA_SEC (30 * 60)  // 30 minutes
 
 #define SHOW_TIME_DATA_SEC 5
 #define SHOW_WEATHER_DATA_SEC 4

@@ -1,6 +1,8 @@
 #include "GenericHttpClient/include/GenericHttpClient.hpp"
 
 String GenericHttpClient::httpGet(String url, int& httpStatusCode) {
+    Serial.println("Sending HTTPS request to: " + String(url));
+
     WiFiClientSecure wifiClient;
     HTTPClient httpClient;
 
@@ -12,8 +14,7 @@ String GenericHttpClient::httpGet(String url, int& httpStatusCode) {
     httpClient.begin(wifiClient, url);
     httpStatusCode = httpClient.GET();
 
-    Serial.println("httpStatusCode: ");
-    Serial.println(httpStatusCode);
+    Serial.println("Received HTTP status code: " + String(httpStatusCode) + "\n");
 
     String result;
     if (httpStatusCode == 200) {
