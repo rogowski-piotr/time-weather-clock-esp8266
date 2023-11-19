@@ -67,7 +67,7 @@ void DisplayController::showWeatherData(const WeatherApiData& data) {
     // displaying pressure
     lcd.setCursor(0,1);
     lcd.print("P:");
-    lcd.print(data.getTemperature());
+    lcd.print(data.getPressure());
     lcd.print("hPa");
 
     // displaying wind
